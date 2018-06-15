@@ -1,0 +1,14 @@
+/home/khalil/dotnet/HomeBase/tests/bin/Debug/netcoreapp2.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/home/khalil/dotnet/HomeBase/tests/bin/Debug/netcoreapp2.0/xunit.runner.utility.netstandard15.dll
+/home/khalil/dotnet/HomeBase/tests/bin/Debug/netcoreapp2.0/xunit.runner.reporters.netstandard15.dll
+/home/khalil/dotnet/HomeBase/tests/bin/Debug/netcoreapp2.0/tests.deps.json
+/home/khalil/dotnet/HomeBase/tests/bin/Debug/netcoreapp2.0/tests.runtimeconfig.json
+/home/khalil/dotnet/HomeBase/tests/bin/Debug/netcoreapp2.0/tests.runtimeconfig.dev.json
+/home/khalil/dotnet/HomeBase/tests/bin/Debug/netcoreapp2.0/tests.dll
+/home/khalil/dotnet/HomeBase/tests/bin/Debug/netcoreapp2.0/tests.pdb
+/home/khalil/dotnet/HomeBase/tests/obj/Debug/netcoreapp2.0/tests.csprojResolveAssemblyReference.cache
+/home/khalil/dotnet/HomeBase/tests/obj/Debug/netcoreapp2.0/tests.csproj.CoreCompileInputs.cache
+/home/khalil/dotnet/HomeBase/tests/obj/Debug/netcoreapp2.0/tests.AssemblyInfoInputs.cache
+/home/khalil/dotnet/HomeBase/tests/obj/Debug/netcoreapp2.0/tests.AssemblyInfo.cs
+/home/khalil/dotnet/HomeBase/tests/obj/Debug/netcoreapp2.0/tests.dll
+/home/khalil/dotnet/HomeBase/tests/obj/Debug/netcoreapp2.0/tests.pdb

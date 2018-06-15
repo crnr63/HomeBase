@@ -1,0 +1,13 @@
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/HomeBase.deps.json
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/HomeBase.runtimeconfig.json
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/HomeBase.runtimeconfig.dev.json
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/HomeBase.dll
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/HomeBase.pdb
+/home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/HomeBase.csprojResolveAssemblyReference.cache
+/home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/HomeBase.csproj.CoreCompileInputs.cache
+/home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/HomeBase.AssemblyInfoInputs.cache
+/home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/HomeBase.AssemblyInfo.cs
+/home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/HomeBase.dll
+/home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/HomeBase.pdb
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/app.db

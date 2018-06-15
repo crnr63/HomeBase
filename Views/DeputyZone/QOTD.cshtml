@@ -1,0 +1,66 @@
+@model IEnumerable<HomeBase.Models.QOTD>
+
+@{
+    ViewData["Title"]= "Member Zone";
+    Layout = "~/Views/Shared/_MemberZoneLayout.cshtml";
+
+}
+
+<h2> QOTD</h2>
+<h4>QOTD</h4>
+
+@foreach (var item in Model) {
+   <div class="panel-group" id="accordionMessagesSetup">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title"></h4>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>@Html.DisplayNameFor(model => model.Question)</th>
+
+              <th>@Html.DisplayNameFor(model => model.QuestionAuthor)</th>
+
+              <th>@Html.DisplayNameFor(model => model.QuestionDate)</th>
+
+              <th>@Html.DisplayNameFor(model => model.Theme)</th>
+
+              <th>Extras</th>
+
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><a class="accordion-toggle" data-toggle="collapse" data-parent=
+              "#accordionMessagesSetup" href=@string.Format("#collapseMessagesSetup{0}",item.ID)>
+             <span class="glyphicon glyphicon-chevron-down"></span>
+              @Html.DisplayFor(modelItem
+              => item.Question)</a></td>
+
+              <td>@Html.DisplayFor(modelItem => item.QuestionAuthor)</td>
+
+              <td>@Html.DisplayFor(modelItem => item.QuestionDate)</td>
+
+              <td>@Html.DisplayFor(modelItem => item.Theme)</td>
+
+              <td><a asp-action="Details" asp-route-id=@item.ID>Details</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id=@string.Format("collapseMessagesSetup{0}",item.ID) class=
+      "panel-collapse collapse">
+        <div>
+          <p style="background-color: red">Someting ELSE in here</p>
+
+          <p style="background-color: red">Someting ELSE2 in here</p>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+ 
