@@ -26,4 +26,8 @@
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <StartupObject>HomeBase.Program</StartupObject>
+  </PropertyGroup>
 </Project>
