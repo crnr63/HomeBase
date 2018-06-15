@@ -11,3 +11,6 @@
 /home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/HomeBase.dll
 /home/khalil/dotnet/HomeBase/obj/Debug/netcoreapp2.0/HomeBase.pdb
 /home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/app.db
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/xunit.runner.utility.netstandard15.dll
+/home/khalil/dotnet/HomeBase/bin/Debug/netcoreapp2.0/xunit.runner.reporters.netstandard15.dll
