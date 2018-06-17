@@ -233,6 +233,10 @@ namespace HomeBase.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
                     await _userManager.AddToRoleAsync(user, "preApproval");   
+                    if(user.Email=="KhalilJolibois@gmail.com"){
+                        await _userManager.AddToRoleAsync(user, "Admin");   
+
+                    }
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");

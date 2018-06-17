@@ -1,4 +1,4 @@
-@model IEnumerable<HomeBase.Models.QOTD>
+@model IEnumerable<HomeBase.Models.DZQOTDModelView>
 
 @{
     ViewData["Title"]= "Member Zone";
@@ -18,13 +18,13 @@
         <table class="table">
           <thead>
             <tr>
-              <th>@Html.DisplayNameFor(model => model.Question)</th>
+              <th>@Html.DisplayNameFor(model => model.QOTD.Question)</th>
 
-              <th>@Html.DisplayNameFor(model => model.QuestionAuthor)</th>
+              <th>@Html.DisplayNameFor(model => model.QOTD.QuestionAuthor)</th>
 
-              <th>@Html.DisplayNameFor(model => model.QuestionDate)</th>
+              <th>@Html.DisplayNameFor(model => model.QOTD.QuestionDate)</th>
 
-              <th>@Html.DisplayNameFor(model => model.Theme)</th>
+              <th>@Html.DisplayNameFor(model => model.QOTD.Theme)</th>
 
               <th>Extras</th>
 
@@ -35,28 +35,57 @@
           <tbody>
             <tr>
               <td><a class="accordion-toggle" data-toggle="collapse" data-parent=
-              "#accordionMessagesSetup" href=@string.Format("#collapseMessagesSetup{0}",item.ID)>
+              "#accordionMessagesSetup" href=@string.Format("#collapseMessagesSetup{0}",item.QOTD.ID)>
              <span class="glyphicon glyphicon-chevron-down"></span>
               @Html.DisplayFor(modelItem
-              => item.Question)</a></td>
+              => item.QOTD.Question)</a></td>
 
-              <td>@Html.DisplayFor(modelItem => item.QuestionAuthor)</td>
+              <td>@Html.DisplayFor(modelItem => item.QOTD.QuestionAuthor)</td>
 
-              <td>@Html.DisplayFor(modelItem => item.QuestionDate)</td>
+              <td>@Html.DisplayFor(modelItem => item.QOTD.QuestionDate)</td>
 
-              <td>@Html.DisplayFor(modelItem => item.Theme)</td>
+              <td>@Html.DisplayFor(modelItem => item.QOTD.Theme)</td>
 
-              <td><a asp-action="Details" asp-route-id=@item.ID>Details</a></td>
+              <td><a asp-action="Details" asp-route-id=@item.QOTD.ID>Details</a></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div id=@string.Format("collapseMessagesSetup{0}",item.ID) class=
+      <div id=@string.Format("collapseMessagesSetup{0}",item.QOTD.ID) class=
       "panel-collapse collapse">
         <div>
-          <p style="background-color: red">Someting ELSE in here</p>
+          <table class="table">
+          <thead>
+            <tr>
+              <th>Author</th>
 
-          <p style="background-color: red">Someting ELSE2 in here</p>
+              <th>QuestionDate</th>
+
+              <th>Answer</th>
+
+          
+              <th></th>
+            </tr>
+          </thead>
+          @foreach (var answer in item.QOTDAnswers){
+      <tbody>
+            <tr>
+           
+
+              <td>@Html.DisplayFor(modelItem => answer.Author)</td>
+
+              <td>@Html.DisplayFor(modelItem => answer.QuestionDate)</td>
+
+              <td>@Html.DisplayFor(modelItem => answer.Answer)</td>
+
+              <td><a asp-action="Details" asp-route-id=@item.QOTD.ID>Details</a></td>
+            </tr>
+          </tbody>
+       
+          }
+ </table>
+         
+         
         </div>
       </div>
     </div>

@@ -23,38 +23,24 @@ namespace HomeBase
         {
             Configuration = configuration;
         }
-      public static void SeedUsers(UserManager<IdentityUser> userManager)
+      public static void SeedUser(UserManager<IdentityUser> userManager)
 {
-    if (userManager.FindByNameAsync
-("user1").Result == null)
+   
+
+
+    if (userManager.FindByNameAsync("TakeATour").Result == null)
     {
         IdentityUser user = new IdentityUser();
-        user.UserName = "user1";
-        user.Email = "user1@localhost";
-       
-
-        IdentityResult result = userManager.CreateAsync(user, "password_goes_here").Result;
-
-        if (result.Succeeded)
-        {
-            userManager.AddToRoleAsync(user,"NormalUser").Wait();
-        }
-    }
-
-
-    if (userManager.FindByNameAsync("user2").Result == null)
-    {
-        IdentityUser user = new IdentityUser();
-        user.UserName = "hireKhalil";
+        user.UserName = "TakeATour";
         user.Email = "user2@localhost";
 
 
-        IdentityResult result = userManager.CreateAsync(user, "password_goes_here").Result;
+        IdentityResult result = userManager.CreateAsync(user, "HireMe!").Result;
 
         if (result.Succeeded)
         {
             userManager.AddToRoleAsync(user,
-                                "Administrator").Wait();
+                                "PotentialEmployer").Wait();
         }
     }
 }  
@@ -67,7 +53,8 @@ private async Task CreateUserRoles(IServiceProvider serviceProvider)
             //List<IdentityRole> roleChecks = await RoleManager.Roles.ToListAsync();  
                         var roleCheckpreapp = await RoleManager.RoleExistsAsync("preApproval");  
                         var deputycheck = await RoleManager.RoleExistsAsync("député");  
-    
+                var roleCheckpe = await RoleManager.RoleExistsAsync("PotentialEmployer");  
+
             var roleCheck = await RoleManager.RoleExistsAsync("Admin");  
             if (!roleCheck)  
             {  
@@ -85,29 +72,7 @@ private async Task CreateUserRoles(IServiceProvider serviceProvider)
                 roleResult = await RoleManager.CreateAsync(new IdentityRole("PreApproval"));  
             }  
  //Assign Admin role to the main User here we have given our newly loregistered login id for Admin management  
-            ApplicationUser user = await UserManager.FindByEmailAsync("KhalilJolibois@gmail.com"); 
-            List<ApplicationUser> allUsers = await UserManager.Users.ToListAsync();
-            foreach (ApplicationUser b in allUsers){
-              if (!await UserManager.IsInRoleAsync(b, "Admin"))
-            {
-                await UserManager.AddToRoleAsync(user, "preApproval");   
-             }
-               
-
-            }
-//if (!RoleManager.RoleExistsAsync("NormalUser").Result)
-    //{
-      //  IdentityRole role = new IdentityRole();
-      //  role.Name = "NormalUser";
-      //  role.Description = "Perform normal operations.";
-     //   IdentityResult roleResult = RoleManager.
-   //     CreateAsync(role).Result;
- //   }
-
-         //   var User = new ApplicationUser();   
-           // Debug.Print(User.ToString());
-            await UserManager.AddToRoleAsync(user, "Admin");   
-  
+ 
         }  
         public IConfiguration Configuration { get; }
 

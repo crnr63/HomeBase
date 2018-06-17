@@ -19,8 +19,7 @@ namespace HomeBase.Models
         [Display(Name = "QuestionDate")]
         [DataType(DataType.Date)]
         public DateTime QuestionDate { get; set; }
-    
-
+     
  
         public string Answer{ get; set; }
   
