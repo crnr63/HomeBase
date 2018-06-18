@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace HomeBase.Models
 {
-    public static class SeedData
+    public static class SeedParticipants
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -173,7 +173,13 @@ namespace HomeBase.Models
                         DateCreated=DateTime.Parse("1986-2-23"),
                         Creator="Khalil"
                      },
-
+                    new ParticipantQOTD
+                     {
+                        GivenName= "Marilou",
+                        FamilyName="Gantier",
+                        DateCreated=DateTime.Parse("1986-2-23"),
+                        Creator="Khalil"
+                     },
                      new ParticipantQOTD
                      {
                         GivenName= "Sophia",

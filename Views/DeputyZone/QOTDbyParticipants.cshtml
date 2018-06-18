@@ -1,0 +1,79 @@
+@model IEnumerable<HomeBase.Models.DZQOTDModelViewbyParticipant>
+
+  
+
+
+@foreach (var item in Model) {
+   <div class="panel-group" id="accordionMessagesSetup">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title"></h4>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Full Name</th>
+
+              <th>Date Created</th>
+<th></th>
+    
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><a class="accordion-toggle" data-toggle="collapse" data-parent=
+              "#accordionMessagesSetup" href=@string.Format("#collapseMessagesSetupPar{0}",item.ParticipantQOTD.ID)>
+             <span class="glyphicon glyphicon-chevron-down"></span>
+             @Html.DisplayFor(modelItem => item.ParticipantQOTD.GivenName) @Html.DisplayFor(modelItem => item.ParticipantQOTD.FamilyName)</a></td>
+
+          
+              <td>@Html.DisplayFor(modelItem => item.ParticipantQOTD.DateCreated)</td>
+
+
+              <td><a asp-action="Details" asp-route-id=@item.ParticipantQOTD.ID>Details</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id=@string.Format("collapseMessagesSetupPar{0}",item.ParticipantQOTD.ID) class=
+      "panel-collapse collapse">
+        <div>
+          <table class="table">
+          <thead>
+            <tr>
+             
+               <th>Question</th>
+
+              <th>QuestionDate</th>
+
+              <th>Answer</th>
+
+          
+              <th></th>
+            </tr>
+          </thead>
+          @foreach (var answer in item.QOTDpAnswers){
+      <tbody>
+            <tr>
+           
+
+        
+            <td>@Html.DisplayFor(modelItem => answer.Question)</td>
+              <td>@Html.DisplayFor(modelItem => answer.QuestionDate)</td>
+
+              <td>@Html.DisplayFor(modelItem => answer.Answer)</td>
+
+              <td><a asp-action="Details" asp-route-id=@Html.DisplayFor(modelItem => answer.ID)>Details</a></td>
+            </tr>
+          </tbody>
+       
+          }
+ </table>
+         
+         
+        </div>
+      </div>
+    </div>
+  </div>
+}

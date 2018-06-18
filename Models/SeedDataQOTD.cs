@@ -44,14 +44,14 @@ namespace HomeBase.Models
                      new QOTD
                      {
                         Question = "French Fries or Sweet Potato Fries ",
-                        QuestionAuthor= "Charles",
+                        QuestionAuthor= "Khalil",
                         QuestionDate=DateTime.Parse("2018-3-15"),
                         Theme="",
                      },
                      new QOTD
                      {
                         Question = "Where Does Everyone Live Now",
-                        QuestionAuthor= "Khalil",
+                        QuestionAuthor= "Charles",
                         QuestionDate=DateTime.Parse("2018-3-15"),
                         Theme="",
                      },
