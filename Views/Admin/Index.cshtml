@@ -41,7 +41,8 @@
                 @Html.DisplayFor(modelItem => item.ID)
             </td>
             <td>
-            
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+
             </td>
         </tr>
 }

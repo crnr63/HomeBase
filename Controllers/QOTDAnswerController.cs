@@ -63,7 +63,7 @@ namespace HomeBase.Controllers
             // REVIEW
             QOTD QuestionQuery = _context.QOTD.Where(x=> x.ID==id).Select(x => x).FirstOrDefault();
             List<AuthorListElement> AuthorQuery = await _context.ParticipantQOTD.Select(x=> new AuthorListElement { FullName= x.GivenName+" "+ x.FamilyName, ID=x.ID}).OrderBy(x=> x.FullName).Distinct().ToListAsync();
-            var QOTDAnswerVM = new QOTDAnswerViewModel();
+            var QOTDAnswerVM = new QOTDAnswerCreateEditViewModel();
             Add(AuthorQuery,4);
 
             QOTDAnswerVM.Authors= Add(AuthorQuery,4);
@@ -80,7 +80,7 @@ namespace HomeBase.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Question,QuestionID,Authors,QuestionDate,Answer")] QOTDAnswerViewModel QOTDAnswerVM,IFormCollection form)
+        public async Task<IActionResult> Create([Bind("ID,Question,QuestionID,Authors,QuestionDate,Answer")] QOTDAnswerCreateEditViewModel QOTDAnswerVM,IFormCollection form)
         {   Debug.Print(QOTDAnswerVM.QuestionID.ToString());
 
           //chane to entry for each author
@@ -119,7 +119,7 @@ namespace HomeBase.Controllers
 
             var qOTDAnswer = await _context.QOTDAnswer.SingleOrDefaultAsync(m => m.ID == id);
             List<AuthorListElement> AuthorQuery = await _context.ParticipantQOTD.Select(x=> new AuthorListElement { FullName= x.GivenName+" "+ x.FamilyName, ID=x.ID}).OrderBy(x=> x.FullName).Distinct().ToListAsync();
-            var QOTDAnswerVM = new QOTDAnswerViewModel();
+            var QOTDAnswerVM = new QOTDAnswerCreateEditViewModel();
             QOTDAnswerVM.Answer= qOTDAnswer.Answer;
             QOTDAnswerVM.Authors= Add(AuthorQuery,4);
             QOTDAnswerVM.Question = qOTDAnswer.Question;

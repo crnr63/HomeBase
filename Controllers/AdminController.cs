@@ -40,9 +40,9 @@ namespace HomeBase.Controllers
             var users = await _context.Users.Select(x => x).ToListAsync();
 
             var Rolesz=
-            from ro in _context.Roles
-            join usr in _context.UserRoles on ro.Id equals usr.RoleId
-            select new { RoleName = ro.NormalizedName, useridrolestb=usr.UserId };
+                        from ro in _context.Roles
+                        join usr in _context.UserRoles on ro.Id equals usr.RoleId
+                        select new { RoleName = ro.NormalizedName, useridrolestb=usr.UserId };
 
 
             Dictionary<string,adminViewModel> trip = new Dictionary<string,adminViewModel>();
@@ -67,7 +67,35 @@ namespace HomeBase.Controllers
         
         return View(finalprod);
         }
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var Rolesz=
+                        (from ro in _context.Roles
+                        join usr in _context.UserRoles on ro.Id equals usr.RoleId
+                        select  new { RoleName = ro.NormalizedName, useridrolestb=usr.UserId }).Distinct();
+            List<SelectListItem> RolesList= new List<SelectListItem>();
+            foreach ( var item in Rolesz){
+            RolesList.Add(new SelectListItem{ Value = item.useridrolestb, Text = item.RoleName });
+            }
 
+            var CurrentUser = await _context.Users.SingleOrDefaultAsync(m => m.Id== id );
+            if (CurrentUser== null)
+            {
+                return NotFound();
+            }
+            adminUserEditViewModel EditViewModel= new adminUserEditViewModel()
+            {
+            Email=CurrentUser.Email,
+            Username=CurrentUser.UserName,
+            ID=CurrentUser.Id,
+            Roles=RolesList
+            };
+            return View(EditViewModel);
+        }
         public IActionResult NonAdmin()
         {
         return View();

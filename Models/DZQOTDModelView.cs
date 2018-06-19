@@ -6,6 +6,6 @@ namespace HomeBase.Models
 public class DZQOTDModelView
 {
     public QOTD QOTD { get; set; }
-    public IEnumerable<QOTDAnswer> QOTDAnswers { get; set; }
+    public IEnumerable<QOTDAnswerViewModel> QOTDAnswers { get; set; }
 }
 }

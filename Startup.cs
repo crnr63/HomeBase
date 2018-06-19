@@ -23,38 +23,35 @@ namespace HomeBase
         {
             Configuration = configuration;
         }
-      public static void SeedUser(UserManager<IdentityUser> userManager)
-{
-   
-
-
-    if (userManager.FindByNameAsync("TakeATour").Result == null)
-    {
-        IdentityUser user = new IdentityUser();
-        user.UserName = "TakeATour";
-        user.Email = "user2@localhost";
-
-
-        IdentityResult result = userManager.CreateAsync(user, "HireMe!").Result;
-
-        if (result.Succeeded)
+        public async Task SeedUser(IServiceProvider serviceProvider)
         {
-            userManager.AddToRoleAsync(user,
-                                "PotentialEmployer").Wait();
-        }
-    }
-}  
-private async Task CreateUserRoles(IServiceProvider serviceProvider)  
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();  
+
+            if (userManager.FindByNameAsync("jlibok@github.com").Result == null)
+                {
+                    ApplicationUser user = new ApplicationUser { 
+                        UserName = "jlibok@github.com", 
+                        Email = "jlibok@github.com" 
+                    };
+                    
+                    var result = await userManager.CreateAsync(user, "Tour4Hire");
+           
+                    if (result.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(user,"PotentialEmployer").Wait();
+                    }
+                }
+        }  
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)  
         {  
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();  
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();  
             IdentityResult roleResult;  
             //Adding Addmin Role  
             //List<IdentityRole> roleChecks = await RoleManager.Roles.ToListAsync();  
-                        var roleCheckpreapp = await RoleManager.RoleExistsAsync("preApproval");  
-                        var deputycheck = await RoleManager.RoleExistsAsync("député");  
-                var roleCheckpe = await RoleManager.RoleExistsAsync("PotentialEmployer");  
-
+            var roleCheckpreapp = await RoleManager.RoleExistsAsync("preApproval");  
+            var deputycheck = await RoleManager.RoleExistsAsync("député");  
+            var roleCheckpe = await RoleManager.RoleExistsAsync("PotentialEmployer");  
             var roleCheck = await RoleManager.RoleExistsAsync("Admin");  
             if (!roleCheck)  
             {  
@@ -71,7 +68,11 @@ private async Task CreateUserRoles(IServiceProvider serviceProvider)
                 //create the roles and seed them to the database  
                 roleResult = await RoleManager.CreateAsync(new IdentityRole("PreApproval"));  
             }  
- //Assign Admin role to the main User here we have given our newly loregistered login id for Admin management  
+            if (!roleCheckpe)  
+            {  
+                //create the roles and seed them to the database  
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("PotentialEmployer"));  
+            }  
  
         }  
         public IConfiguration Configuration { get; }
@@ -79,54 +80,50 @@ private async Task CreateUserRoles(IServiceProvider serviceProvider)
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-    services.AddDbContext<QOTDContext>(options =>
-               options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-                     
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                
+            services.AddDbContext<QOTDContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                        
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-        //          services.AddAuthorization(options =>
-   // {
-   //     options.AddPolicy("AtLeast21", policy =>
-   //         policy.Requirements.Add(new MinimumAgeRequirement(21)));
-   // });
-    //    services.AddSingleton<IAuthorizationHandler,  PermissionHandler>();
 
-services.Configure<IdentityOptions>(options =>
-    {
-        // Password settings
-        options.Password.RequireDigit = true;
-        options.Password.RequiredLength = 8;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = true;
-        options.Password.RequireLowercase = false;
-        options.Password.RequiredUniqueChars = 6;
 
-        // Lockout settings
-        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-        options.Lockout.MaxFailedAccessAttempts = 10;
-        options.Lockout.AllowedForNewUsers = true;
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 6;
 
-        // User settings
-        options.User.RequireUniqueEmail = true;
-    });
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
 
-    services.ConfigureApplicationCookie(options =>
-    {
-        // Cookie settings
-        options.Cookie.HttpOnly = true;
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-        // If the LoginPath isn't set, ASP.NET Core defaults 
-        // the path to /Account/Login.
-        options.LoginPath = "/Account/Login";
-        // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
-        // the path to /Account/AccessDenied.
-        options.AccessDeniedPath = "/Account/AccessDenied";
-        options.SlidingExpiration = true;
-    });
-            // Add application services.
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                // If the LoginPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/Login.
+                options.LoginPath = "/Account/Login";
+                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/AccessDenied.
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+                // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
@@ -144,8 +141,8 @@ services.Configure<IdentityOptions>(options =>
             }
             else
             {
-     app.UseStatusCodePagesWithReExecute("/Home/Error/");
-                 }
+                app.UseStatusCodePagesWithReExecute("/Home/Error/");
+            }
 
             app.UseStaticFiles();
 
@@ -159,6 +156,7 @@ services.Configure<IdentityOptions>(options =>
             });
             
             CreateUserRoles(services).Wait();
+            SeedUser(services).Wait();
         }
     }
 }

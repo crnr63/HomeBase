@@ -612,6 +612,8 @@ namespace HomeBase.Models
                         QuestionID =10  ,      
                         Author ="13"  ,
                         Answer="89",
+                         
+
                      },
                        new QOTDAnswer
                      {
@@ -950,7 +952,7 @@ namespace HomeBase.Models
                      {
                         Question ="Snap Chat or Instagram Video?"   ,    
                         QuestionID =15  ,      
-                        Author ="Karen"  ,
+                        Author ="6"  ,
                         Answer="IG Video",
                      },
                      new QOTDAnswer
