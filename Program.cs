@@ -17,7 +17,10 @@ namespace HomeBase
     {
         public static void Main(string[] args)
         {
-        var host = BuildWebHost(args);
+
+          var webHostcArgs = args.Where(arg => arg != "/opt/startup/init_container.sh").ToArray();  
+        var host = BuildWebHost(webHostcArgs);
+
 
             using (var scope = host.Services.CreateScope())
             {
@@ -43,7 +46,6 @@ namespace HomeBase
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:5001/")
                 .Build();
     }
 }
