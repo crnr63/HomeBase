@@ -79,12 +79,29 @@ namespace HomeBase
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<ApplicationDbContext>(options =>
+        {  
+
+                        // Use SQL Database if in Azure, otherwise, use SQLite
+            if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production"){
+                services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
+                              services.AddDbContext<QOTDContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
+            }
+            else{
+              services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
                 
             services.AddDbContext<QOTDContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                            
+            }
+             
+
+            // Automatically perform database migration
+            services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+            services.BuildServiceProvider().GetService<QOTDContext>().Database.Migrate();
+
                         
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
