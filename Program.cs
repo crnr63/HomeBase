@@ -30,9 +30,9 @@ namespace HomeBase
                 {
                     var context = services.GetRequiredService<QOTDContext>();
                     context.Database.Migrate();
-                    SeedParticipants.Initialize(services);
-                    SeedDataQOTD.InitializeQOTD(services);
-                    SeedAnswers.Initialize(services);
+                  //  SeedParticipants.Initialize(services);
+                   // SeedDataQOTD.InitializeQOTD(services);
+                  //  SeedAnswers.Initialize(services);
                 }
                 catch (Exception ex)
                 {
