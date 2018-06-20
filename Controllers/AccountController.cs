@@ -233,7 +233,7 @@ namespace HomeBase.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-                    await _userManager.AddToRoleAsync(user, "preApproval");   
+                    await _userManager.AddToRoleAsync(user, "Député");   
                     if(user.Email=="KhalilJolibois@gmail.com"){
                         await _userManager.AddToRoleAsync(user, "Admin");   
 

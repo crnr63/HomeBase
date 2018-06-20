@@ -47,10 +47,10 @@ namespace HomeBase
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();  
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();  
             IdentityResult roleResult;  
-            //Adding Addmin Role  
+            //Adding Admin Role  
             //List<IdentityRole> roleChecks = await RoleManager.Roles.ToListAsync();  
             var roleCheckpreapp = await RoleManager.RoleExistsAsync("preApproval");  
-            var deputycheck = await RoleManager.RoleExistsAsync("député");  
+            var deputycheck = await RoleManager.RoleExistsAsync("Député");  
             var roleCheckpe = await RoleManager.RoleExistsAsync("PotentialEmployer");  
             var roleCheck = await RoleManager.RoleExistsAsync("Admin");  
             if (!roleCheck)  

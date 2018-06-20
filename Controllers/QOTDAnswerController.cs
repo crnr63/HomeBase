@@ -8,9 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using HomeBase.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeBase.Controllers
-{
+{[Authorize]
     public class QOTDAnswerController : Controller
     {
         private readonly QOTDContext _context;
@@ -137,7 +138,7 @@ namespace HomeBase.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Question,Author,QuestionAuthor,QuestionDate,Genre,Price,Theme")] QOTDAnswer qOTDAnswer)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Question,Author,QuestionAuthor,QuestionDate")] QOTDAnswer qOTDAnswer)
         {
             if (id != qOTDAnswer.ID)
             {

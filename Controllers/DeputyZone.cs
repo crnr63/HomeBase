@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomeBase.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeBase.Controllers
 {
+    [Authorize(Roles = "Député,potentialEmployers")]
     public class DeputyZoneController : Controller
-    {        private readonly QOTDContext _QOTDcontext;
+    {        
+        private readonly QOTDContext _QOTDcontext;
 
         public DeputyZoneController(
             QOTDContext QOTDcontext){
@@ -26,7 +29,7 @@ namespace HomeBase.Controllers
             List<QOTD> Questions = await _QOTDcontext.QOTD.ToListAsync();
             List<QOTDAnswer> Answers = await _QOTDcontext.QOTDAnswer.ToListAsync();
             List<ParticipantQOTD> Participants = await _QOTDcontext.ParticipantQOTD.OrderBy(x => x.GivenName).ToListAsync();
-
+            
             Dictionary<int,List<QOTDAnswerViewModel>> AnswersDictionary= new Dictionary<int, List<QOTDAnswerViewModel>>();
             Dictionary<int,ParticipantQOTD> ParticDictionary= new Dictionary<int, ParticipantQOTD>();
               
@@ -67,7 +70,6 @@ namespace HomeBase.Controllers
                 if (AnswersDictionary.ContainsKey(answer.QuestionID))
                     { 
                        AnswersDictionary[answer.QuestionID].Add(newModel);
-                       AnswersDictionary[answer.QuestionID].ForEach(i => Console.Write("{0}\t", i.Answer));
                     }
                 else
                     {
@@ -170,6 +172,14 @@ namespace HomeBase.Controllers
             return View(rigormortis2);
 
         }  
+    public IActionResult OurBNB()
+        {
+            return View();
+        }  
+    public IActionResult RePrices()
+        {
+            return View();
+        }   
      public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

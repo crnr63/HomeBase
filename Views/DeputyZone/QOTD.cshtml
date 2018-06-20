@@ -36,9 +36,6 @@
 
               <th>@Html.DisplayNameFor(model => model.QOTD.Theme)</th>
 
-              <th>Extras</th>
-
-              <th></th>
             </tr>
           </thead>
 
@@ -56,7 +53,6 @@
 
               <td>@Html.DisplayFor(modelItem => item.QOTD.Theme)</td>
 
-              <td><a asp-action="Details" asp-route-id=@item.QOTD.ID>Details</a></td>
             </tr>
           </tbody>
         </table>
@@ -69,12 +65,10 @@
             <tr>
               <th>Author</th>
 
-              <th>QuestionDate</th>
 
               <th>Answer</th>
 
           
-              <th></th>
             </tr>
           </thead>
           @foreach (var answer in item.QOTDAnswers){
@@ -84,11 +78,9 @@
 
               <td>@Html.DisplayFor(modelItem => answer.Author)</td>
 
-              <td>@Html.DisplayFor(modelItem => answer.QuestionDate)</td>
 
               <td>@Html.DisplayFor(modelItem => answer.Answer)</td>
 
-              <td><a asp-action="Details" asp-route-id=@item.QOTD.ID>Details</a></td>
             </tr>
           </tbody>
        

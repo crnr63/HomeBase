@@ -14,8 +14,7 @@
             <tr>
               <th>Full Name</th>
 
-              <th>Date Created</th>
-<th></th>
+
     
             </tr>
           </thead>
@@ -28,10 +27,9 @@
              @Html.DisplayFor(modelItem => item.ParticipantQOTD.GivenName) @Html.DisplayFor(modelItem => item.ParticipantQOTD.FamilyName)</a></td>
 
           
-              <td>@Html.DisplayFor(modelItem => item.ParticipantQOTD.DateCreated)</td>
 
 
-              <td><a asp-action="Details" asp-route-id=@item.ParticipantQOTD.ID>Details</a></td>
+              
             </tr>
           </tbody>
         </table>
@@ -50,7 +48,6 @@
               <th>Answer</th>
 
           
-              <th></th>
             </tr>
           </thead>
           @foreach (var answer in item.QOTDpAnswers){
@@ -63,16 +60,15 @@
 
               <td>@Html.DisplayFor(modelItem => answer.Answer)</td>
 
-              <td><a asp-action="Details" asp-route-id=@Html.DisplayFor(modelItem => answer.ID)>Details</a></td>
             </tr>
           </tbody>
        
           }
  </table>
-   Server=tcp:nobleassemblee.database.windows.net,1433;Database=coreDB;User ID=jolibok;Password=Skeptan17;Encrypt=true;Connection Timeout=30;      
          
         </div>
       </div>
     </div>
   </div>
 }
+    

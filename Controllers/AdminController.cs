@@ -21,28 +21,37 @@ using HomeBase.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using HomeBase.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace HomeBase.Controllers
 {
-[Authorize(Roles = "Admin,preApproval")]
+[Authorize(Roles = "Admin")]
 
  public class AdminController : Controller
     {
-   
-      private readonly ApplicationDbContext _context;
+    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-        public AdminController( ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    private readonly ApplicationDbContext _context;
+    public AdminController(
+           ApplicationDbContext ApplicationDbContext,
+           RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager
+           ){
+            _context = ApplicationDbContext;
+            _roleManager= roleManager;
+            _userManager = userManager;
+
+            }
+
         public async Task<IActionResult> Index()
         {  
             var users = await _context.Users.Select(x => x).ToListAsync();
 
-            var Rolesz=
-                        from ro in _context.Roles
+           var Rolesz=
+                        (from ro in _context.Roles
                         join usr in _context.UserRoles on ro.Id equals usr.RoleId
-                        select new { RoleName = ro.NormalizedName, useridrolestb=usr.UserId };
+                        select  new { RoleName = ro.NormalizedName, useridrolestb=usr.UserId }).Distinct();
 
 
             Dictionary<string,adminViewModel> trip = new Dictionary<string,adminViewModel>();
@@ -75,11 +84,10 @@ namespace HomeBase.Controllers
             }
             var Rolesz=
                         (from ro in _context.Roles
-                        join usr in _context.UserRoles on ro.Id equals usr.RoleId
-                        select  new { RoleName = ro.NormalizedName, useridrolestb=usr.UserId }).Distinct();
+                         select  new { RoleName = ro.Name});
             List<SelectListItem> RolesList= new List<SelectListItem>();
             foreach ( var item in Rolesz){
-            RolesList.Add(new SelectListItem{ Value = item.useridrolestb, Text = item.RoleName });
+            RolesList.Add(new SelectListItem{ Value = item.RoleName, Text = item.RoleName });
             }
 
             var CurrentUser = await _context.Users.SingleOrDefaultAsync(m => m.Id== id );
@@ -96,10 +104,63 @@ namespace HomeBase.Controllers
             };
             return View(EditViewModel);
         }
-        public IActionResult NonAdmin()
+
+        // POST: QOTD/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.U
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("ID,Email,Username,Roles")] adminUserEditViewModel adminUserEdit,IFormCollection form)
         {
-        return View();
+
+            if (id != adminUserEdit.ID)
+            {
+                return NotFound();
+            }
+;
+            var CurrentUser = await _context.Users.SingleOrDefaultAsync(m => m.Id== id );
+  
+              
+            if (adminUserEdit != null && ModelState.IsValid)
+            {
+                try
+                { //optimize
+                 var yes = await _context.UserRoles.Where(x=> x.UserId == id ).ToListAsync();
+                   foreach (var roleEntry in yes){
+                        Debug.Print(roleEntry.RoleId);
+                      var ff= _context.UserRoles.Remove(roleEntry);
+                    }
+
+                   foreach (var roles in form["Roles"]){
+                    await _userManager.AddToRoleAsync(CurrentUser, roles);   
+              
+               }
+                  await _context.SaveChangesAsync();
+        
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(adminUserEdit.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(adminUserEdit);
         }
+
+        private bool UserExists(string id)
+        {
+            return _context.Users.Any(e => e.Id == id);
+        }
+   
+
+
     }
 
 

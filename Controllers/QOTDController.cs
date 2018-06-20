@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HomeBase.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeBase.Controllers
-{
+{[Authorize]
     public class QOTDController : Controller
     {
         private readonly QOTDContext _context;
