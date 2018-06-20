@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HomeBase.Controllers
 {
-    [Authorize(Roles = "Député,potentialEmployers")]
+    [Authorize(Roles = "Député,Admin,potentialEmployers")]
     public class DeputyZoneController : Controller
     {        
         private readonly QOTDContext _QOTDcontext;
