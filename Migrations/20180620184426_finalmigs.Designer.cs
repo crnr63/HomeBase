@@ -11,8 +11,8 @@ using System;
 namespace HomeBase.Migrations
 {
     [DbContext(typeof(QOTDContext))]
-    [Migration("20180620161936_whyalltext")]
-    partial class whyalltext
+    [Migration("20180620184426_finalmigs")]
+    partial class finalmigs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
