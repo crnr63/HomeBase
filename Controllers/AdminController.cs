@@ -47,32 +47,32 @@ namespace HomeBase.Controllers
         public async Task<IActionResult> Index()
         {  
             var users = await _context.Users.Select(x => x).ToListAsync();
-
+            // User Roles is roles id and user id, so need to to a join to get the name of the role for display
+            //consider adding extra join to user table to get the name of the user to get rid of work in following code
            var Rolesz=
                         (from ro in _context.Roles
                         join usr in _context.UserRoles on ro.Id equals usr.RoleId
                         select  new { RoleName = ro.NormalizedName, useridrolestb=usr.UserId }).Distinct();
 
-
+            //create a dictionary organized by id for easy access later. get better names for variables.
+            // trying to avoid too many variables with similar names based around "role" and "user"
             Dictionary<string,adminViewModel> trip = new Dictionary<string,adminViewModel>();
         
             foreach ( var us in users){
                 trip.Add(us.Id,new adminViewModel{ID=us.Id, Username=us.UserName, Email= us.Email, RolesList= "" });
             }
         
-            Console.WriteLine("Key = {0}, Value = {1}", trip["0440d88d-cbfe-459a-ba75-9e3f20c8af51"].Username,trip["0440d88d-cbfe-459a-ba75-9e3f20c8af51"].ID);
-        
+            // iterates through all roles and add to roles string            
             foreach( var role in Rolesz){
                 trip[role.useridrolestb].RolesList += (role.RoleName+ " , ") ;
             }
-        
+            //create collection for iterating through in the view
             ICollection<adminViewModel> finalprod = new List<adminViewModel>();
-        
+            // add the model to the collection
             foreach(KeyValuePair<string,adminViewModel> ad in trip){
                 finalprod.Add(ad.Value);
             }
         
-            Debug.Print(finalprod.Count.ToString());
         
         return View(finalprod);
         }
@@ -82,19 +82,23 @@ namespace HomeBase.Controllers
             {
                 return NotFound();
             }
+            //get all roles names. No ID needed because roles manager uses name
             var Rolesz=
                         (from ro in _context.Roles
                          select  new { RoleName = ro.Name});
             List<SelectListItem> RolesList= new List<SelectListItem>();
+            //populate rolesslist
             foreach ( var item in Rolesz){
             RolesList.Add(new SelectListItem{ Value = item.RoleName, Text = item.RoleName });
             }
-
+            // get info of selected user, perhaps should rename field. 
             var CurrentUser = await _context.Users.SingleOrDefaultAsync(m => m.Id== id );
             if (CurrentUser== null)
             {
                 return NotFound();
             }
+            //create edit view model and map fields
+
             adminUserEditViewModel EditViewModel= new adminUserEditViewModel()
             {
             Email=CurrentUser.Email,
@@ -102,6 +106,7 @@ namespace HomeBase.Controllers
             ID=CurrentUser.Id,
             Roles=RolesList
             };
+
             return View(EditViewModel);
         }
 
@@ -125,9 +130,10 @@ namespace HomeBase.Controllers
             {
                 try
                 { //optimize
+                //remove existing roles
+                // TODO Check and skip over roles that exist already and are selected by editing user.
                  var yes = await _context.UserRoles.Where(x=> x.UserId == id ).ToListAsync();
                    foreach (var roleEntry in yes){
-                        Debug.Print(roleEntry.RoleId);
                       var ff= _context.UserRoles.Remove(roleEntry);
                     }
 

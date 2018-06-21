@@ -1073,6 +1073,8 @@ namespace HomeBase.Models
                         Answer="Iceland and Antartica",
                      }  
  };
+
+ // add try catch and formatting stripping 
  foreach( var entry in AllAnswers){
    Debug.Print("---------------------------");
    Debug.Print(entry.AuthorName);

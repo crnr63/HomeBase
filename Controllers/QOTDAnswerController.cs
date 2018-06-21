@@ -62,6 +62,9 @@ namespace HomeBase.Controllers
         public async Task<IActionResult> Create([FromRoute] int id)
         {
             // REVIEW
+            //Take assignment of Question ID from the QOTD Index Page, User is not allowed to specify  
+           // specific page on the actua page with the form 
+           // creating select list 
             QOTD QuestionQuery = _context.QOTD.Where(x=> x.ID==id).Select(x => x).FirstOrDefault();
             List<AuthorListElement> AuthorQuery = await _context.ParticipantQOTD.Select(x=> new AuthorListElement { FullName= x.GivenName+" "+ x.FamilyName, ID=x.ID}).OrderBy(x=> x.FullName).Distinct().ToListAsync();
             var QOTDAnswerVM = new QOTDAnswerCreateEditViewModel();
@@ -84,9 +87,9 @@ namespace HomeBase.Controllers
         public async Task<IActionResult> Create([Bind("ID,Question,QuestionID,Authors,QuestionDate,Answer")] QOTDAnswerCreateEditViewModel QOTDAnswerVM,IFormCollection form)
         {   Debug.Print(QOTDAnswerVM.QuestionID.ToString());
 
-          //chane to entry for each author
-            Debug.Print("##################################################################################################");
-            Debug.Print("##################################################################################################");
+          //not sure I want to allow multiple authors 
+          // need to swich to creating a different row for each author instead of saving multiple author ids
+            
             string AuthorIds="";
             foreach( string item in form["Authors"]){
             string ite= item;
@@ -117,7 +120,7 @@ namespace HomeBase.Controllers
             {
                 return NotFound();
             }
-
+            // repeating select list creation ,need to DRY it
             var qOTDAnswer = await _context.QOTDAnswer.SingleOrDefaultAsync(m => m.ID == id);
             List<AuthorListElement> AuthorQuery = await _context.ParticipantQOTD.Select(x=> new AuthorListElement { FullName= x.GivenName+" "+ x.FamilyName, ID=x.ID}).OrderBy(x=> x.FullName).Distinct().ToListAsync();
             var QOTDAnswerVM = new QOTDAnswerCreateEditViewModel();
