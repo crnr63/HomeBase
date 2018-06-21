@@ -9,6 +9,11 @@ namespace HomeBase.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
 migrationBuilder.CreateTable(
                 name: "ParticipantQOTD",
                 columns: table => new
@@ -48,20 +53,16 @@ migrationBuilder.CreateTable(
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                          .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Answer = table.Column<string>(maxLength: 600, nullable: true),
-                    Question = table.Column<string>(maxLength: 600, nullable:false),
+                    Author = table.Column<string>(maxLength: 600, nullable:false),
                     QuestionID = table.Column<int>(nullable:false),
-
+                    Question = table.Column<string>(maxLength: 600, nullable:false),
+                    AuthorName = table.Column<string>(maxLength: 600, nullable:false),
                     QuestionDate = table.Column<DateTime>(type: "DateTime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_QOTDAnswer", x => x.ID);
                 });
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-
         }
     }
 }

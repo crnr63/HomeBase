@@ -14,7 +14,8 @@ namespace HomeBase.Models
         public int QuestionID { get; set; }        
 
         public string Author { get; set; }  
-        
+        public string AuthorName { get; set; }  
+
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "QuestionDate")]
         [DataType(DataType.Date)]

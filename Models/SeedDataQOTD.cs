@@ -16,9 +16,7 @@ namespace HomeBase.Models
              if (context.QOTD.Any())
                 {
                     return;   // DB has been seeded
-                }
-                
-                  context.QOTD.AddRange(
+                }     context.QOTD.AddRange(
                      
                      new QOTD
                      {

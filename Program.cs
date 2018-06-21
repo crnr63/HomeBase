@@ -32,7 +32,7 @@ namespace HomeBase
                     context.Database.Migrate();
                     SeedParticipants.Initialize(services);
                     SeedDataQOTD.InitializeQOTD(services);
-                    SeedAnswers.Initialize(services);
+                    SeedAnswers.InitializeAsync(services).Wait();
                 }
                 catch (Exception ex)
                 {

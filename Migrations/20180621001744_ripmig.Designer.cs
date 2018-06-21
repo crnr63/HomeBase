@@ -11,8 +11,8 @@ using System;
 namespace HomeBase.Migrations
 {
     [DbContext(typeof(QOTDContext))]
-    [Migration("20180611034712_formod2")]
-    partial class formod2
+    [Migration("20180621001744_ripmig")]
+    partial class ripmig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,7 +56,6 @@ namespace HomeBase.Migrations
                     b.Property<DateTime>("QuestionDate");
 
                     b.Property<string>("Theme")
-                        .IsRequired()
                         .HasMaxLength(500);
 
                     b.HasKey("ID");
@@ -73,11 +72,15 @@ namespace HomeBase.Migrations
 
                     b.Property<string>("Author");
 
+                    b.Property<string>("AuthorName");
+
                     b.Property<string>("Question")
                         .IsRequired()
                         .HasMaxLength(500);
 
                     b.Property<DateTime>("QuestionDate");
+
+                    b.Property<int>("QuestionID");
 
                     b.HasKey("ID");
 

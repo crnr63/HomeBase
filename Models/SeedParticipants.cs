@@ -120,7 +120,7 @@ namespace HomeBase.Models
                      new ParticipantQOTD
                      {
                         GivenName= "Etienne",
-                        FamilyName="Descourreges",
+                        FamilyName="Decourreges",
                         DateCreated=DateTime.Parse("2018-3-13"),
                         Creator="Khalil"
                      },
@@ -140,7 +140,7 @@ namespace HomeBase.Models
                      },
                      new ParticipantQOTD
                      {
-                        GivenName= "Marsha ",
+                        GivenName= "Marsha",
                         FamilyName="Samson",
                         DateCreated=DateTime.Parse("2018-3-13"),
                         Creator="Khalil"
