@@ -16,7 +16,7 @@ namespace HomeBase.Models
                 serviceProvider.GetRequiredService<DbContextOptions<QOTDContext>>()))
 
             {
-                // Look for any movies.
+                // Look for any answers
                 if (context.QOTDAnswer.Any())
                 {
                     return;   // DB has been seeded
@@ -28,7 +28,7 @@ namespace HomeBase.Models
                   Debug.Print(fullname);
                        particDic.Add(fullname,participant.ID) ;
                 }
- List<QOTDAnswer> AllAnswers = new List<QOTDAnswer>(){
+                List<QOTDAnswer> AllAnswers = new List<QOTDAnswer>(){
                      new QOTDAnswer
                      {
                         Question ="How many Times did Enzo wear a dress in High School?"   ,    

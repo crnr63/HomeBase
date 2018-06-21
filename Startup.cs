@@ -26,7 +26,8 @@ namespace HomeBase
         public async Task SeedUser(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();  
-
+        // create user for potential employers
+        //never create a user with actual important access here because you sometimes forget to remove stuff before pushing to github
             if (userManager.FindByNameAsync("jlibok@github.com").Result == null)
                 {
                     ApplicationUser user = new ApplicationUser { 
@@ -47,7 +48,7 @@ namespace HomeBase
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();  
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();  
             IdentityResult roleResult;  
-            //Adding Admin Role  
+            // TODO convert this into more effiient iteration through collection 
             //List<IdentityRole> roleChecks = await RoleManager.Roles.ToListAsync();  
             var roleCheckpreapp = await RoleManager.RoleExistsAsync("preApproval");  
             var deputycheck = await RoleManager.RoleExistsAsync("Député");  
@@ -89,6 +90,7 @@ namespace HomeBase
                         options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
             }
             else{
+                //sqllte for local dev
               services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
                 
@@ -171,8 +173,9 @@ namespace HomeBase
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            
+            // create l default roles for auth
             CreateUserRoles(services).Wait();
+            //create user for potential employers
             SeedUser(services).Wait();
         }
     }

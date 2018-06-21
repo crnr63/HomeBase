@@ -12,7 +12,7 @@ namespace HomeBase.Models
             using (var context = new QOTDContext (
                 serviceProvider.GetRequiredService<DbContextOptions<QOTDContext>>()))
             {
-                // Look for any movies.
+                // Look for any participants.
                 if (context.ParticipantQOTD.Any())
                 {
                     return;   // DB has been seeded

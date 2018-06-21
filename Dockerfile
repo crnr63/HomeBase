@@ -19,7 +19,7 @@ FROM microsoft/aspnetcore:2.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 WORKDIR /
-    
+    #this to enable azure ssh 
 COPY sshd_config /etc/ssh/
 RUN pwd
 

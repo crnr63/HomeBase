@@ -29,7 +29,8 @@ namespace HomeBase
                 try
                 {
                     var context = services.GetRequiredService<QOTDContext>();
-                    context.Database.Migrate();
+                    context.Database.Migrate(); 
+                    // seeding intitial values for Question of the Day Featureset
                     SeedParticipants.Initialize(services);
                     SeedDataQOTD.InitializeQOTD(services);
                     SeedAnswers.InitializeAsync(services).Wait();
