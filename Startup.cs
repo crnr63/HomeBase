@@ -88,21 +88,29 @@ namespace HomeBase
                         options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
                               services.AddDbContext<QOTDContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
+                services.AddDbContext<FantasyZoneContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));         
+                services.AddDbContext<RealEstateContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
             }
             else{
                 //sqllte for local dev
               services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-                
+                    services.AddDbContext<RealEstateContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));    
             services.AddDbContext<QOTDContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-                            
+             services.AddDbContext<FantasyZoneContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));               
             }
              
 
             // Automatically perform database migration
             services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
             services.BuildServiceProvider().GetService<QOTDContext>().Database.Migrate();
+            services.BuildServiceProvider().GetService<FantasyZoneContext>().Database.Migrate();
+            services.BuildServiceProvider().GetService<RealEstateContext>().Database.Migrate();
 
                         
             services.AddIdentity<ApplicationUser, IdentityRole>()

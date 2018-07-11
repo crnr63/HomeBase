@@ -1,0 +1,475 @@
+@model IEnumerable<HomeBase.Models.FantasyWeekGames>
+@section Scripts
+{
+<script type="text/javascript">
+
+var displayDate = function(e) {
+  console.log(e);
+  if ( e.target.className=="my-ppgcalc"){
+  const points = document.getElementById("points").value;
+  const gamesPlayed = document.getElementById("gamesPlayed").value;
+  document.getElementById("my-pointsPerGame").value = points / gamesPlayed;
+  }
+  else{
+    const points = document.getElementById("opppoints").value;
+  const gamesPlayed = document.getElementById("oppgamesPlayed").value;
+  document.getElementById("opp-pointsPerGame").value = points / gamesPlayed;
+  }
+};
+
+var calcstats = function(e, tpca) {
+  var teamstats = {
+    ATL: { week22: 3, week23: 4, week24: 3, count: 0, oppcount: 0 },
+    BKN: { week22: 3, week23: 1, week24: 2, count: 0, oppcount: 0 },
+    BOS: { week22: 3, week23: 3, week24: 3, count: 0, oppcount: 0 },
+    CHA: { week22: 3, week23: 3, week24: 4, count: 0, oppcount: 0 },
+    CHI: { week22: 3, week23: 4, week24: 7, count: 0, oppcount: 0 },
+    CLE: { week22: 3, week23: 4, week24: 3, count: 0, oppcount: 0 },
+    DAL: { week22: 3, week23: 3, week24: 2, count: 0, oppcount: 0 },
+    DEN: { week22: 3, week23: 4, week24: 4, count: 0, oppcount: 0 },
+    DET: { week22: 4, week23: 4, week24: 2, count: 0, oppcount: 0 },
+    GSW: { week22: 3, week23: 3, week24: 1, count: 0, oppcount: 0 },
+    HOU: { week22: 4, week23: 4, week24: 5, count: 0, oppcount: 0 },
+    IND: { week22: 3, week23: 4, week24: 6, count: 0, oppcount: 0 },
+    LAC: { week22: 3, week23: 4, week24: 3, count: 0, oppcount: 0 },
+    LAL: { week22: 4, week23: 3, week24: 2, count: 0, oppcount: 0 },
+    MEM: { week22: 3, week23: 4, week24: 2, count: 0, oppcount: 0 },
+    MIA: { week22: 4, week23: 4, week24: 3, count: 0, oppcount: 0 },
+    MIL: { week22: 3, week23: 4, week24: 2, count: 0, oppcount: 0 },
+    MIN: { week22: 4, week23: 3, week24: 3, count: 0, oppcount: 0 },
+    NOR: { week22: 4, week23: 4, week24: 2, count: 0, oppcount: 0 },
+    NYK: { week22: 3, week23: 3, week24: 3, count: 0, oppcount: 0 },
+    OKC: { week22: 3, week23: 4, week24: 2, count: 0, oppcount: 0 },
+    ORL: { week22: 4, week23: 4, week24: 3, count: 0, oppcount: 0 },
+    PHI: { week22: 4, week23: 4, week24: 2, count: 0, oppcount: 0 },
+    PHO: { week22: 3, week23: 4, week24: 3, count: 0, oppcount: 0 },
+    POR: { week22: 4, week23: 3, week24: 2, count: 0, oppcount: 0 },
+    SAC: { week22: 3, week23: 4, week24: 3, count: 0, oppcount: 0 },
+    SAS: { week22: 3, week23: 4, week24: 2, count: 0, oppcount: 0 },
+    TOR: { week22: 4, week23: 2, week24: 3, count: 0, oppcount: 0 },
+    UTA: { week22: 3, week23: 4, week24: 2, count: 0, oppcount: 0 },
+    WAS: { week22: 3, week23: 4, week24: 3, count: 0, oppcount: 0 }
+  };
+
+  var teamPlayerCountArray = Array.prototype.slice.call(
+    document.getElementsByClassName("teamPlayersInput")
+  );
+  teamPlayerCountArray.map(
+    x => {
+      if(x.id.split("-")[1]=="opp"){
+   teamstats[x.id.split("-")[0]]["oppcount"] = parseInt(x.value)
+  }
+    else{teamstats[x.id.split("-")[0]]["count"] = parseInt(x.value)} 
+
+    } //   teamstats[x.id.split("-")]["count"]
+  );
+  console.log(teamstats);
+
+  var ppgame = document.getElementById("my-pointsPerGame").value;
+  
+    var oppppgame = document.getElementById("opp-pointsPerGame").value;
+  ppgame = parseInt(ppgame);
+  var countCalcs= Object.entries(teamstats).reduce(
+    (summary, x) => {
+      //summary["game"]+=x["count"]
+      summary["w23games"] += x[1].count * x[1].week23;
+      summary["w24games"] += x[1].count * x[1].week24;
+      summary["w22games"] += x[1].count * x[1].week22;
+      summary["w23oppgames"] += x[1].oppcount * x[1].week23;
+      summary["w24oppgames"] += x[1].oppcount * x[1].week24;
+      summary["w22oppgames"] += x[1].oppcount * x[1].week22;      
+      return summary;
+    },
+    { 'w22games': 0, 'w23games': 0, 'w24games': 0,'w22oppgames': 0, 'w23oppgames': 0, 'w24oppgames': 0 }
+  );
+  console.log("w23game");
+var w22points=countCalcs["w22games"]*ppgame;
+  var w22oppoints=countCalcs["w22oppgames"]*oppppgame;
+  var w23points=countCalcs["w23games"]*ppgame;
+  var w23oppoints=countCalcs["w23oppgames"]*oppppgame;
+  var w24points=countCalcs["w24games"]*ppgame;
+  var w24oppoints=countCalcs["w24oppgames"]*oppppgame;
+
+//first week of playoffs
+  $('#w22games').html(countCalcs["w22games"]);
+  $('#w22oppgames').text(countCalcs["w22oppgames"]);
+  $('#w22points').text(w22points);
+  $('#w22opppoints').text(w22oppoints);
+  $('#w22diff').text(w22points-w22oppoints);
+//second week 
+  $('#w23games').text(countCalcs["w23games"]);
+  $('#w23oppgames').text(countCalcs["w23oppgames"]);
+  $('#w23points').text(w23points);
+  $('#w23opppoints').text(w23oppoints);
+  $('#w23diff').text(w23points-w23oppoints);
+ //third week  
+  $('#w24games').text(countCalcs["w24games"]);
+  $('#w24oppgames').text(countCalcs["w24oppgames"]);
+  $('#w24points').text(w24points);
+  $('#w24opppoints').text(w24oppoints);
+  $('#w24diff').text(w24points-w24oppoints);
+
+
+  console.log(e.target.value);
+  console.log(e.target.id.split("-")[0]);
+};
+var ppgCalcArray = Array.prototype.slice.call(
+  document.getElementsByClassName("my-ppgcalc")
+);
+ppgCalcArray.map(x =>
+  x.addEventListener("blur", (event) => {
+    displayDate(event);
+  })
+);
+
+var ppgOppCalcArray = Array.prototype.slice.call(
+  document.getElementsByClassName("opp-ppgcalc")
+);
+ppgOppCalcArray.map(x =>
+  x.addEventListener("blur", (event) => {
+    displayDate(event);
+  })
+);
+//document.getElementById("gamesPlayed").addEventListener("blur", () => { displayDate(event);});
+var teamPlayerCountArray = Array.prototype.slice.call(
+  document.getElementsByClassName("teamPlayersInput")
+);
+teamPlayerCountArray.map(x =>
+  x.addEventListener("blur", (event) => {
+    calcstats(event);
+  })
+);
+$(function(){
+  $("input[type='number']").on("click", function(){
+    $(this).focus();
+  });
+});
+</script>
+}
+
+
+<table>
+  <label>Points From Previous Week</label>
+  <input class="my-ppgcalc" id="points" value="0" />
+  <label>Games Played Previous Week<label>
+  <input class="my-ppgcalc" id="gamesPlayed" value="0">
+    <label> Points Per Game</label>
+  <input value="0" id="my-pointsPerGame" />
+</table>
+<table>
+  <label>opp Points From Previous Week</label>
+  <input value="0" class="opp-ppgcalc" id="opppoints" />
+  <label>opp Games Played Previous Week<label>
+  <input class="opp-ppgcalc" id="oppgamesPlayed" value="0">
+    <label> Points Per Game</label>
+  <input value="0" id="opp-pointsPerGame" />
+</table>
+<button class="clear">Clear Input</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Playoff Week</th>
+      <th>ATL</th>
+      <th>BKN</th>
+      <th>BOS</th>
+      <th>CHA</th>
+      <th>CHI</th>
+      <th>CLE</th>
+      <th>DAL</th>
+      <th>DEN</th>
+      <th>DET</th>
+      <th>GSW</th>
+      <th>HOU</th>
+      <th>IND</th>
+      <th>LAC</th>
+      <th>LAL</th>
+      <th>MEM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td>Week 22 </td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    <td>3</td>
+    </tr>
+    <tr>
+      <td>Week 23</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Week 24</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4 </td>
+      <td>4</td>
+      <tr>
+        <td>Total
+          <td>10</td>
+          <td>10</td>
+          <td> 9</td>
+          <td> 11</td>
+          <td> 11 </td>
+          <td> 11 </td>
+          <td>10 </td>
+          <td>10</td>
+          <td>11</td>
+          <td>10 </td>
+          <td>11</td>
+          <td>10 </td>
+          <td>12 </td>
+          <td>10 </td>
+          <td>11</td>
+      </tr>
+      <tr>
+        <td># of players
+          <td><input value="0" id="ATL-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="BKN-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td> <input value="0" id="BOS-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td> <input value="0" id="CHA-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td> <input value="0" id="CHI-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td> <input value="0" id="CLE-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+          <td><input value="0" id="DAL-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="DEN-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="DET-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="GSW-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+          <td><input value="0" id="HOU-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="IND-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+          <td><input value="0" id="LAC-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+          <td><input value="0" id="LAL-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="MEM-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      </tr>
+      <tr>
+        <td>opponent  players
+          <td><input value="0" id="ATL-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="BKN-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td> <input value="0" id="BOS-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td> <input value="0" id="CHA-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td> <input value="0" id="CHI-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td> <input value="0" id="CLE-opp-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+          <td><input value="0" id="DAL-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="DEN-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="DET-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="GSW-opp-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+          <td><input value="0" id="HOU-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="IND-opp-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+          <td><input value="0" id="LAC-opp-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+          <td><input value="0" id="LAL-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+          <td><input value="0" id="MEM-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      </tr>
+</table>
+<table class="table">
+  <thead>
+    <tr>
+      <th>playof week</th>
+      <th>MIA</th>
+      <th>MIL</th>
+      <th>MIN</th>
+      <th>NOR</th>
+      <th>NYK </th>
+      <th>OKC</th>
+      <th>ORL</th>
+      <th>PHI</th>
+      <th>PHO</th>
+      <th>POR </th>
+      <th>SAC</th>
+      <th>SAS</th>
+      <th>TOR</th>
+      <th>UTA</th>
+      <th>WAS </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Week 22 </td>
+      <td>3 </td>
+      <td>3</td>
+      <td>3 </td>
+      <td>4 </td>
+      <td>3 </td>
+      <td>4 </td>
+      <td>3 </td>
+      <td>3 </td>
+      <td>3 </td>
+      <td>4 </td>
+      <td>4 </td>
+      <td>4 </td>
+      <td>4</td>
+      <td>3 </td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Week 23</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Week 24</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+
+      <td>Total</td>
+      <td>10</td>
+      <td>11</td>
+      <td>10</td>
+      <td>11</td>
+      <td>10</td>
+      <td>10</td>
+      <td>9</td>
+      <td>11</td>
+      <td>10</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td># of players
+      </td>
+      <td><input class="teamPlayersInput" value="0" id="MIA-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="MIL-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="MIN-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td> <input value="0" id="NOR-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td> <input value="0" id="NYK-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td> <input value="0" id="OKC-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td> <input value="0" id="ORL-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="PHI-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+      <td><input value="0" id="PHO-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="POR-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="SAC-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+      <td><input value="0" id="SAS-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="TOR-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+      <td><input value="0" id="UTA-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+      <td><input value="0" id="WAS-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+
+    </tr>
+      <tr>
+      <td>opponent players
+      </td>
+      <td><input class="teamPlayersInput" value="0" id="MIA-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="MIL-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="MIN-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td> <input value="0" id="NOR-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td> <input value="0" id="NYK-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td> <input value="0" id="OKC-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td> <input value="0" id="ORL-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="PHI-opp-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+      <td><input value="0" id="PHO-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="POR-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="SAC-opp-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+      <td><input value="0" id="SAS-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+      <td><input value="0" id="TOR-opp-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+      <td><input value="0" id="UTA-opp-players" type="number" class="teamPlayersInput" style="width: 40px"> </td>
+      <td><input value="0" id="WAS-opp-players" type="number" class="teamPlayersInput" style="width: 40px"></td>
+
+    </tr>
+</table>
+
+<table class="table">
+
+  <thead>
+    <tr>
+      <th>week</th>
+      <th> Games Played</th>
+      <th> OPP Games Played</th>
+      <th> estimated weekly points</th>
+      <th> OPP weekly points</th>
+      <th> Difference</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td> Week 22</td>
+    <td > <span id="w22games">Calc games</span></td>
+      <td>  <span id="w22oppgames">opp calc games</span></td>
+      <td > <span id="w22points">Calc points</span></td>
+      <td > <span id="w22opppoints">opp calc points</span></td>
+      <td ><span id="w22diff"> diff</span></td>
+    </tr>
+    <tr>
+      <td> Week 23</td>
+      <td > <span id="w23games">Calc games</span></td>
+      <td>  <span id="w23oppgames">opp calc games</span></td>
+      <td > <span id="w23points">Calc points</span></td>
+      <td > <span id="w23opppoints">opp calc points</span></td>
+      <td ><span id="w23diff"> diff</span></td>
+    </tr>
+    <tr>
+      <td> Week 24</td>
+      <td > <span id="w24games">Calc games</span></td>
+      <td>  <span id="w24oppgames">opp calc games</span></td>
+      <td > <span id="w24points">Calc points</span></td>
+      <td > <span id="w24opppoints">opp calc points</span></td>
+      <td ><span id="w24diff"> diff</span></td>
+
+    </tr>
+  </tbody>
+</table>

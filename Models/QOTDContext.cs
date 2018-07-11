@@ -10,6 +10,7 @@ namespace HomeBase.Models
         }
         public DbSet<HomeBase.Models.ParticipantQOTD> ParticipantQOTD  { get; set; }
         public DbSet<HomeBase.Models.QOTDAnswer> QOTDAnswer { get; set; }
+        public DbSet<HomeBase.Models.USAHouses> USAHouses { get; set; }
 
         public DbSet<HomeBase.Models.QOTD> QOTD { get; set; }
     }

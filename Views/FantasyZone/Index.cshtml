@@ -1,0 +1,215 @@
+@model IEnumerable<HomeBase.Models.FantasyWeekGames>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.WeekNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ATL_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BOS_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BKN_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CHA_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CHI_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CLE_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DAL_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DEN_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Det_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GSW_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HOU_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IND_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LAC_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LAL_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MEM_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MIA_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MIL_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MIN_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NOP_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NYK_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OKC_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ORL_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PHI_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PHO_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.POR_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SAC_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SAS_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TOR_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UTA_Games)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WAS_Games)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeekNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ATL_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOS_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BKN_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHA_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHI_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CLE_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DAL_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DEN_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Det_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GSW_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HOU_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IND_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LAC_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LAL_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MEM_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MIA_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MIL_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MIN_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOP_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NYK_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OKC_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ORL_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHI_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHO_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.POR_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SAC_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SAS_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TOR_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UTA_Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WAS_Games)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

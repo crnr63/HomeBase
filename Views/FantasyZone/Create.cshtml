@@ -1,0 +1,183 @@
+@model HomeBase.Models.FantasyWeekGames
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>FantasyWeekGames</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="WeekNumber" class="control-label"></label>
+                <input asp-for="WeekNumber" class="form-control" />
+                <span asp-validation-for="WeekNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ATL_Games" class="control-label"></label>
+                <input asp-for="ATL_Games" class="form-control" />
+                <span asp-validation-for="ATL_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BOS_Games" class="control-label"></label>
+                <input asp-for="BOS_Games" class="form-control" />
+                <span asp-validation-for="BOS_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BKN_Games" class="control-label"></label>
+                <input asp-for="BKN_Games" class="form-control" />
+                <span asp-validation-for="BKN_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CHA_Games" class="control-label"></label>
+                <input asp-for="CHA_Games" class="form-control" />
+                <span asp-validation-for="CHA_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CHI_Games" class="control-label"></label>
+                <input asp-for="CHI_Games" class="form-control" />
+                <span asp-validation-for="CHI_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CLE_Games" class="control-label"></label>
+                <input asp-for="CLE_Games" class="form-control" />
+                <span asp-validation-for="CLE_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DAL_Games" class="control-label"></label>
+                <input asp-for="DAL_Games" class="form-control" />
+                <span asp-validation-for="DAL_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DEN_Games" class="control-label"></label>
+                <input asp-for="DEN_Games" class="form-control" />
+                <span asp-validation-for="DEN_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Det_Games" class="control-label"></label>
+                <input asp-for="Det_Games" class="form-control" />
+                <span asp-validation-for="Det_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GSW_Games" class="control-label"></label>
+                <input asp-for="GSW_Games" class="form-control" />
+                <span asp-validation-for="GSW_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HOU_Games" class="control-label"></label>
+                <input asp-for="HOU_Games" class="form-control" />
+                <span asp-validation-for="HOU_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IND_Games" class="control-label"></label>
+                <input asp-for="IND_Games" class="form-control" />
+                <span asp-validation-for="IND_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LAC_Games" class="control-label"></label>
+                <input asp-for="LAC_Games" class="form-control" />
+                <span asp-validation-for="LAC_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LAL_Games" class="control-label"></label>
+                <input asp-for="LAL_Games" class="form-control" />
+                <span asp-validation-for="LAL_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MEM_Games" class="control-label"></label>
+                <input asp-for="MEM_Games" class="form-control" />
+                <span asp-validation-for="MEM_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MIA_Games" class="control-label"></label>
+                <input asp-for="MIA_Games" class="form-control" />
+                <span asp-validation-for="MIA_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MIL_Games" class="control-label"></label>
+                <input asp-for="MIL_Games" class="form-control" />
+                <span asp-validation-for="MIL_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MIN_Games" class="control-label"></label>
+                <input asp-for="MIN_Games" class="form-control" />
+                <span asp-validation-for="MIN_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NOP_Games" class="control-label"></label>
+                <input asp-for="NOP_Games" class="form-control" />
+                <span asp-validation-for="NOP_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NYK_Games" class="control-label"></label>
+                <input asp-for="NYK_Games" class="form-control" />
+                <span asp-validation-for="NYK_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OKC_Games" class="control-label"></label>
+                <input asp-for="OKC_Games" class="form-control" />
+                <span asp-validation-for="OKC_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ORL_Games" class="control-label"></label>
+                <input asp-for="ORL_Games" class="form-control" />
+                <span asp-validation-for="ORL_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PHI_Games" class="control-label"></label>
+                <input asp-for="PHI_Games" class="form-control" />
+                <span asp-validation-for="PHI_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PHO_Games" class="control-label"></label>
+                <input asp-for="PHO_Games" class="form-control" />
+                <span asp-validation-for="PHO_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="POR_Games" class="control-label"></label>
+                <input asp-for="POR_Games" class="form-control" />
+                <span asp-validation-for="POR_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SAC_Games" class="control-label"></label>
+                <input asp-for="SAC_Games" class="form-control" />
+                <span asp-validation-for="SAC_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SAS_Games" class="control-label"></label>
+                <input asp-for="SAS_Games" class="form-control" />
+                <span asp-validation-for="SAS_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TOR_Games" class="control-label"></label>
+                <input asp-for="TOR_Games" class="form-control" />
+                <span asp-validation-for="TOR_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UTA_Games" class="control-label"></label>
+                <input asp-for="UTA_Games" class="form-control" />
+                <span asp-validation-for="UTA_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WAS_Games" class="control-label"></label>
+                <input asp-for="WAS_Games" class="form-control" />
+                <span asp-validation-for="WAS_Games" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -11,9 +11,10 @@ using System;
 namespace HomeBase.Migrations
 {
     [DbContext(typeof(QOTDContext))]
-    partial class QOTDContextModelSnapshot : ModelSnapshot
+    [Migration("20180709042909_usahouses")]
+    partial class usahouses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
