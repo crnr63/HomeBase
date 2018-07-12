@@ -144,6 +144,12 @@ $(function(){
     $(this).focus();
   });
 });
+var inputs= document.getElementsByTagName("input")
+
+document.getElementById("clear").addEventListener("click", (event) => {
+   $('input').val(0);
+    calcstats(event);
+  })
 </script>
 }
 
@@ -164,7 +170,7 @@ $(function(){
     <label> Points Per Game</label>
   <input value="0" id="opp-pointsPerGame" />
 </table>
-<button class="clear">Clear Input</button>
+<button id="clear">Clear All Input</button>
 <table class="table">
   <thead>
     <tr>
@@ -448,27 +454,27 @@ $(function(){
   <tbody>
     <tr>
       <td> Week 22</td>
-    <td > <span id="w22games">Calc games</span></td>
-      <td>  <span id="w22oppgames">opp calc games</span></td>
-      <td > <span id="w22points">Calc points</span></td>
-      <td > <span id="w22opppoints">opp calc points</span></td>
-      <td ><span id="w22diff"> diff</span></td>
+    <td > <span id="w22games">0</span></td>
+      <td>  <span id="w22oppgames">0</span></td>
+      <td > <span id="w22points">0</span></td>
+      <td > <span id="w22opppoints">0</span></td>
+      <td ><span id="w22diff">0</span></td>
     </tr>
     <tr>
       <td> Week 23</td>
-      <td > <span id="w23games">Calc games</span></td>
-      <td>  <span id="w23oppgames">opp calc games</span></td>
-      <td > <span id="w23points">Calc points</span></td>
-      <td > <span id="w23opppoints">opp calc points</span></td>
-      <td ><span id="w23diff"> diff</span></td>
+      <td > <span id="w23games">0</span></td>
+      <td>  <span id="w23oppgames">0</span></td>
+      <td > <span id="w23points">0</span></td>
+      <td > <span id="w23opppoints">0</span></td>
+      <td ><span id="w23diff"> 0</span></td>
     </tr>
     <tr>
       <td> Week 24</td>
-      <td > <span id="w24games">Calc games</span></td>
-      <td>  <span id="w24oppgames">opp calc games</span></td>
-      <td > <span id="w24points">Calc points</span></td>
-      <td > <span id="w24opppoints">opp calc points</span></td>
-      <td ><span id="w24diff"> diff</span></td>
+      <td > <span id="w24games">0</span></td>
+      <td>  <span id="w24oppgames">0</span></td>
+      <td > <span id="w24points">0</span></td>
+      <td > <span id="w24opppoints">0</span></td>
+      <td ><span id="w24diff"> 0</span></td>
 
     </tr>
   </tbody>
