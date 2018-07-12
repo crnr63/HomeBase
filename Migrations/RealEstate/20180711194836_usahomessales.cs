@@ -28,7 +28,12 @@ namespace HomeBase.Migrations.RealEstate
                     table.PrimaryKey("PK_USAHouses", x => x.ID);
                 });
 
-            migrationBuilder.CreateTable(
+           
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+             migrationBuilder.CreateTable(
                 name: "USAHomeSales",
                 columns: table => new
                 {
@@ -46,10 +51,6 @@ namespace HomeBase.Migrations.RealEstate
                 {
                     table.PrimaryKey("PK_USAHomeSales", x => x.ID);
                 });
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
             migrationBuilder.DropTable(
                 name: "USAHomeSales");
         }
